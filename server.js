@@ -1,5 +1,6 @@
-require('dotenv').config();
+const { Voicemeeter } = require("../voicemeeter-connector");
 
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const express = require('express');
@@ -29,6 +30,39 @@ app.get('/get-sounds', (req, res) => {
     res.send({
         success: true,
         files: files,
+    });
+});
+
+
+Voicemeeter.init().then((voicemeeter) => {
+    voicemeeter.connect();
+
+    app.post('/play-sound', (req, res) => {
+        voicemeeter.setOption(`recorder.load="${process.env.SOUND_DIRECTORY}\\${req.query.file}";`);
+        voicemeeter.setOption(`recorder.play=1;`);
+
+        res.contentType('application/json');
+        res.send({
+            success: true,
+        });
+    });
+
+    app.post('/recorder/play', (req, res) => {
+        voicemeeter.setOption(`recorder.play=1;`);
+
+        res.contentType('application/json');
+        res.send({
+            success: true,
+        });
+    });
+
+    app.post('/recorder/stop', (req, res) => {
+        voicemeeter.setOption(`recorder.stop=1;`);
+
+        res.contentType('application/json');
+        res.send({
+            success: true,
+        });
     });
 });
 

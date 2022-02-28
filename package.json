@@ -1,6 +1,9 @@
 {
+  "name": "voicemeeter-web-api",
+  "version": "0.0.1",
   "dependencies": {
     "dotenv": "^16.0.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "voicemeeter-connector": "^1.0.3"
   }
 }

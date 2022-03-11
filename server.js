@@ -1,4 +1,4 @@
-const { Voicemeeter } = require("../voicemeeter-connector");
+const { Voicemeeter } = require("voicemeeter-connector");
 
 require('dotenv').config();
 const fs = require('fs');
